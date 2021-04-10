@@ -1,26 +1,27 @@
 import readline from 'readline-sync'
 
-interface contentProps {
-    searchTerm?: string
-    prefix?: string
-    sourceContentOriginal?: string
-    sourceContentSanitizes?: string
-    sentences?: [
-        {
-            text: string,
-            keywords: string[],
-            images: string[],
-        }
-    ]
-}
+import {robotText} from './robots/text'
 
 
 
-function start() {
-    const content:contentProps ={} 
+async function start() {
+    const content:contentProps ={
+        prefix:'',
+        searchTerm:'',
+        sentences:[{
+            images:[''],
+            keywords:[''],
+            text:''
+        }],
+        sourceContentOriginal:'',
+        sourceContentSanitizes:''
+    } 
 
     content.searchTerm = askAndReturnSearchTerm();
     content.prefix = askAndReturnPrefix();
+
+    await robotText(content)
+
 
     function askAndReturnSearchTerm() {
         return readline.question('Escreva um termo para pesquisar no Wikipedia: ')
@@ -33,7 +34,7 @@ function start() {
 
         return selectedPrefixText;
     }
-    console.log(content)
+//    console.log(content)
 }
 
 start()
