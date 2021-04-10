@@ -1,8 +1,9 @@
 import algorithmia from 'algorithmia'
 import sentenceBoundaryDetection from 'sbd'
 import env from '../credetials/env.json'
-
+import { load, save } from './state'
 import NaturalLanguageUnderstandingV1 from 'watson-developer-cloud/natural-language-understanding/v1.js'
+import { contentProps, fetchKeywordsOfAllSentencesProps, limitMaximumSentencesProps, senteceProps } from '../Types/TextRobotProps'
 
 const nlu = new NaturalLanguageUnderstandingV1({
     iam_apikey: env.nlu.apikey,
@@ -10,13 +11,21 @@ const nlu = new NaturalLanguageUnderstandingV1({
     url: 'https://gateway.watsonplatform.net/natural-language-understanding/api/'
 })
 
+export async function robotText() {
+    const content = load()
 
-export async function robotText(content: contentProps) {
     await fetchContentFromWikipedia(content);
     sanitizeContent(content);
     breakContentIntoSentences(content);
     limitMaximumSentences(content);
-    await fetchKeywordsOfAllSentences(content)
+   
+    try {
+        await fetchKeywordsOfAllSentences(content);
+        save(content);
+    } catch (error) {
+        console.log(error)
+    }
+    
 
 
     async function fetchContentFromWikipedia(content: contentProps) {
@@ -55,42 +64,40 @@ export async function robotText(content: contentProps) {
     function breakContentIntoSentences(content: contentProps) {
         content.sentences = []
 
-        const sentences = sentenceBoundaryDetection.sentences(content.sourceContentSanitizes)
-        sentences.forEach((sentence) => {
+        const sentences = sentenceBoundaryDetection.sentences(String(content.sourceContentSanitizes))
+        sentences.forEach((sentence: any) => {
             content.sentences.push({
                 text: sentence,
                 keywords: [],
                 images: []
             })
         })
-
     };
 
-    function limitMaximumSentences(content) {
+    function limitMaximumSentences(content: limitMaximumSentencesProps) {
         content.sentences = content.sentences.slice(0, content.maximumSentences)
     }
 
     async function fetchKeywordsOfAllSentences(content) {
+        
         for (const sentence of content.sentences) {
             sentence.keywords = await fetchWatsonAndReturnKeywords(sentence.text)
         }
-        
     }
 
-    async function fetchWatsonAndReturnKeywords(sentence) {
+    async function fetchWatsonAndReturnKeywords(sentence: any) {
         return new Promise((resolve, reject) => {
             nlu.analyze({
                 text: sentence,
                 features: {
                     keywords: {}
                 }
-            }, (error, response) => {
+            }, (error, response: any) => {
                 if (error) {
                     reject(error)
                     return
                 }
-
-                const keywords = response.keywords.map((keyword) => {
+                const keywords = response.keywords.map((keyword: { text: string }) => {
                     return keyword.text
                 })
 
@@ -98,5 +105,4 @@ export async function robotText(content: contentProps) {
             })
         })
     }
-
 };

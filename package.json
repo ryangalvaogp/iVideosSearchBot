@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ryangalvaogp/iVideosSearchBot#readme",
   "dependencies": {
     "algorithmia": "^0.3.10",
+    "fs": "^0.0.1-security",
     "readline-sync": "^1.4.10",
     "sbd": "^1.0.18",
     "ts-node-dev": "^1.1.6",
