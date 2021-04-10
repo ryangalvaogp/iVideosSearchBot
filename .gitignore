@@ -104,3 +104,4 @@ dist
 .tern-port
 credetials/*.json
 yarn.lock
+content.json
