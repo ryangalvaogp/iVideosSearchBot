@@ -4,7 +4,7 @@
   "description": "Este projeto consiste em robôs que buscam imagens, textos, montam um vídeo com after effects e publica no YouTube de acordo com o que o usuário digita.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node-dev --transpile-only --inspect  --ignore-watch node_modules index.ts"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/ryangalvaogp/iVideosSearchBot/issues"
   },
-  "homepage": "https://github.com/ryangalvaogp/iVideosSearchBot#readme"
+  "homepage": "https://github.com/ryangalvaogp/iVideosSearchBot#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10",
+    "ts-node-dev": "^1.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "@types/react-dom": "^17.0.3",
+    "@types/readline-sync": "^1.4.3",
+    "@types/typescript": "^2.0.0",
+    "typescript": "^4.2.4"
+  }
 }
