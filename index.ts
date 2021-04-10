@@ -6,15 +6,7 @@ import {robotText} from './robots/text'
 
 async function start() {
     const content:contentProps ={
-        prefix:'',
-        searchTerm:'',
-        sentences:[{
-            images:[''],
-            keywords:[''],
-            text:''
-        }],
-        sourceContentOriginal:'',
-        sourceContentSanitizes:''
+        maximumSentences: 7
     } 
 
     content.searchTerm = askAndReturnSearchTerm();
@@ -34,7 +26,7 @@ async function start() {
 
         return selectedPrefixText;
     }
-//    console.log(content)
+    console.log(JSON.stringify(content, null, 4))
 }
 
 start()

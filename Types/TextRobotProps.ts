@@ -9,5 +9,6 @@ interface contentProps {
             keywords?: string[],
             images?: string[],
         }
-    ]
+    ],
+    maximumSentences: number
 }
