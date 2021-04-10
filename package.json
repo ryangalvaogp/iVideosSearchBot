@@ -1,0 +1,20 @@
+{
+  "name": "iVideosSearchBot",
+  "version": "1.0.0",
+  "description": "Este projeto consiste em robôs que buscam imagens, textos, montam um vídeo com after effects e publica no YouTube de acordo com o que o usuário digita.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryangalvaogp/iVideosSearchBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryangalvaogp/iVideosSearchBot/issues"
+  },
+  "homepage": "https://github.com/ryangalvaogp/iVideosSearchBot#readme"
+}
