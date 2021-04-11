@@ -1,13 +1,12 @@
-import input from './robots/input';
+import inputRobot from './robots/input';
 import {robotText} from './robots/text';
 import {load} from './robots/state'
-async function start() {
-    input();
-    await robotText();
+import imageRobot from './robots/image'
 
-    
-    const content = load();
-    console.dir(content, {depth:null});
+async function start() {
+    // inputRobot();
+    // await robotText();
+    await imageRobot();
 
 };
 
