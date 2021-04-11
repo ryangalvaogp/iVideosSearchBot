@@ -1,9 +1,10 @@
+//@ts-ignore
 import algorithmia from 'algorithmia'
 import sentenceBoundaryDetection from 'sbd'
 import env from '../credetials/env.json'
 import { load, save } from './state'
 import NaturalLanguageUnderstandingV1 from 'watson-developer-cloud/natural-language-understanding/v1.js'
-import { contentProps, fetchKeywordsOfAllSentencesProps, limitMaximumSentencesProps, senteceProps } from '../Types/TextRobotProps'
+import { contentProps, fetchKeywordsOfAllSentencesProps, limitMaximumSentencesProps } from '../Types/TextRobotProps'
 
 const nlu = new NaturalLanguageUnderstandingV1({
     iam_apikey: env.nlu.apikey,
@@ -16,7 +17,7 @@ export async function robotText() {
 
     await fetchContentFromWikipedia(content);
     sanitizeContent(content);
-    breakContentIntoSentences(content);
+    breakContentIntoSentences(content);//@ts-ignore
     limitMaximumSentences(content);
    
     try {
@@ -62,6 +63,7 @@ export async function robotText() {
     };
 
     function breakContentIntoSentences(content: contentProps) {
+        //@ts-ignore
         content.sentences = []
 
         const sentences = sentenceBoundaryDetection.sentences(String(content.sourceContentSanitizes))
@@ -78,14 +80,15 @@ export async function robotText() {
         content.sentences = content.sentences.slice(0, content.maximumSentences)
     }
 
-    async function fetchKeywordsOfAllSentences(content) {
+    async function fetchKeywordsOfAllSentences(content: contentProps) {
         
         for (const sentence of content.sentences) {
+            //@ts-ignore
             sentence.keywords = await fetchWatsonAndReturnKeywords(sentence.text)
         }
     }
 
-    async function fetchWatsonAndReturnKeywords(sentence: any) {
+    async function fetchWatsonAndReturnKeywords(sentence:string) {
         return new Promise((resolve, reject) => {
             nlu.analyze({
                 text: sentence,

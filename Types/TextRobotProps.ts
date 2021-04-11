@@ -5,11 +5,13 @@ export interface contentProps {
     sourceContentSanitizes?: string 
     sentences: [
         {
-            text: string 
-            keywords: string[]
-            images: string[]
+            text ?: string
+            keywords?:  string[]
+            images?: string[]
+            googleSearchQuery?:string
         }
-    ]
+    ] ,
+    downloadedImages:string[]
     maximumSentences: number
 }
 export interface limitMaximumSentencesProps{
@@ -18,7 +20,7 @@ export interface limitMaximumSentencesProps{
 }
 
 export interface fetchKeywordsOfAllSentencesProps{
-    sentences: contentProps['sentences']
+    sentences: string[]
 }
 
 export type fetchWatsonAndReturnKeywordsResponseProps = {

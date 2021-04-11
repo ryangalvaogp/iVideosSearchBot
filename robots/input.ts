@@ -1,8 +1,10 @@
 import readline from 'readline-sync'
+import { contentProps } from '../Types/TextRobotProps';
 
 import {load, save} from './state'
 
 export default function input (){
+    //@ts-ignore | This variable is filled in during the execution of the robots
     const content: contentProps = {
         maximumSentences: 7
     }
