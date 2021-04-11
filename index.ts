@@ -4,8 +4,8 @@ import {load} from './robots/state'
 import imageRobot from './robots/image'
 
 async function start() {
-    // inputRobot();
-    // await robotText();
+    inputRobot();
+    await robotText();
     await imageRobot();
 
 };
