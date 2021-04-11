@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { contentProps } from '../Types/TextRobotProps';
 const contentFilePath = './content.json';
 
 export function save(content:contentProps) {

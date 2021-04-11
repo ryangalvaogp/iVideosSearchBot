@@ -1,7 +1,8 @@
 import { load, save } from './state';
 import env from '../credetials/env.json';
-import { google } from 'googleapis';
+import { google } from 'googleapis';//@ts-ignore
 import imagedownloader from 'image-downloader'
+import { contentProps } from '../Types/TextRobotProps';
 
 const customSearch = google.customsearch('v1');
 
@@ -12,7 +13,7 @@ export default async function imageRobot() {
     await downloadAllImages(content);
     save(content);
 
-    async function fetchImagesOfAllSentences(content) {
+    async function fetchImagesOfAllSentences(content:contentProps) {
 
         for (const sentence of content.sentences) {
             const query = `${content.searchTerm} ${sentence.keywords[0]}`;
@@ -22,7 +23,7 @@ export default async function imageRobot() {
         };
     };
 
-    async function fetchGoogleAndReturnImagesLinks(query) {
+    async function fetchGoogleAndReturnImagesLinks(query:string) {
         const response = await customSearch.cse.list({
             auth: env.google.apiKey,
             cx: env.google.IDSearchEngine,
@@ -39,7 +40,7 @@ export default async function imageRobot() {
 
     };
 
-    async function downloadAllImages(content) {
+    async function downloadAllImages(content:contentProps) {
         content.downloadedImages = [];
 
         for (let sentenceIndex = 0; sentenceIndex < content.sentences.length; sentenceIndex++) {
