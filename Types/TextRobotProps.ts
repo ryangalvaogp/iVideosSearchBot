@@ -1,6 +1,9 @@
 export interface contentProps {
+    renderProgram: RenderProgramProps
     searchTerm?: string
     prefix?: string
+    lang?: string;
+    titleSearch?: any;
     sourceContentOriginal?: string 
     sourceContentSanitizes?: string 
     sentences: [
@@ -14,6 +17,7 @@ export interface contentProps {
     downloadedImages:string[]
     maximumSentences: number
 }
+export type RenderProgramProps= 'After Effects' | 'FFmpeg' 
 export interface limitMaximumSentencesProps{
     sentences: contentProps['sentences'][]
     maximumSentences: contentProps['maximumSentences']

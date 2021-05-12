@@ -78,7 +78,7 @@ export default async function imageRobot() {
     async function downloadAndSaveImages(url: string, filename: string) {
         return imagedownloader.image({
             url: url,
-            dest: `./downloads/${filename}`
+            dest: `./content/${filename}`
         });
     };
 };

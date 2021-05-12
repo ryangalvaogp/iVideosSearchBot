@@ -9,7 +9,6 @@ async function start() {
     await robotText();
     await imageRobot();
     await videoRobot();
-
 };
 
 start();
