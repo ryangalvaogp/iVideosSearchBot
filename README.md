@@ -153,7 +153,17 @@ FFMPEGCONVERTPATH=C:\\Program Files (x86)\\ffmpeg\\bin\\ffmpeg.exe
 
 
 ``````
-> Verifique se na sua máquina correspondem aos mesmos caminhos, caso contrário, insira os caminhos que estão no seu sistema
+
+- Abra o template.aep que está dentro da pasta iVideosSearchBot\templates\1\, localize a expression do texto que corresponde ao título da pesquisa e mude o caminho do $.eval na para o que realmente corresponde no seu sistema. Seguindo o modelo a baixo:
+
+`````js
+$.evalFile('C:\Users\ryangalvaogp\Documents\GitHub\iVideosSearchBot\templates\1');
+content
+`````
+  
+
+
+> Verifique se os caminhos citados correspondem aos mesmos em sua máquina, caso contrário, substitua pelo os que estão em seu sistema.
 
 
 ## Executando o Projeto ##
