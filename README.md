@@ -8,7 +8,7 @@
   </a>
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat">
 </p>
-<p align="justify">Este projeto consiste em robôs que a partir do input do usuário, buscam textos no wikiédia, fazem downloads de imagens e renderizam um vídeo com after effects ou FFmpeg.
+<p align="justify">Este projeto consiste em robôs que a partir do input do usuário, buscam textos no wikipédia, fazem downloads de imagens e renderizam um vídeo com after effects ou FFmpeg.
  </p>
 
 ## Pré requisitos
