@@ -30,9 +30,13 @@ export async function robotText() {
 
 
     async function fetchContentFromWikipedia(content: contentProps) {
+        let pesquisaNoIdioma = {
+            "articleName": content.searchTerm,
+            "lang": content.lang
+          }
         const algorithmiaAuthenticated = algorithmia(env.apiKeyAlgorithmia)
         const wikipediaAlgorithm = algorithmiaAuthenticated.algo('web/WikipediaParser/0.1.2')
-        const wikipediaResponse = await wikipediaAlgorithm.pipe(content.searchTerm)
+        const wikipediaResponse = await wikipediaAlgorithm.pipe(pesquisaNoIdioma)
         const wikipediaContent = wikipediaResponse.get()
 
         content.sourceContentOriginal = wikipediaContent.content

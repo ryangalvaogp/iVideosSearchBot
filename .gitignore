@@ -104,7 +104,12 @@ dist
 .tern-port
 credetials/*.json
 yarn.lock
+package-lock.json
 content.json
 
-downloads/*.png
-downloads/*.jpg
+#Download And Others Files Auto Generated 
+content/*.png
+content/*.jpg
+content/*.mov
+content/*.mp4
+content/*.js

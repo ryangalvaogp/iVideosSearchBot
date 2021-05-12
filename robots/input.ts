@@ -1,5 +1,5 @@
 import readline from 'readline-sync'
-import { contentProps } from '../Types/TextRobotProps';
+import { contentProps, RenderProgramProps } from '../Types/TextRobotProps';
 
 import {load, save} from './state'
 
@@ -11,6 +11,9 @@ export default function input (){
     
     content.searchTerm = askAndReturnSearchTerm();
     content.prefix = askAndReturnPrefix();
+    content.lang = askAndReturnLang();
+    content.renderProgram = chooseRenderProgram()
+
     save(content);
     
     function askAndReturnSearchTerm() {
@@ -23,5 +26,38 @@ export default function input (){
         const selectedPrefixText = prefixes[selectedPrefixIndex]
     
         return selectedPrefixText;
+    }
+
+    function askAndReturnLang(){
+        const prefixes = [
+            'Portugues', 
+            'Ingles',
+            'Espanhol',
+            'Russo',
+            'Japones',
+        ];
+        const idioma = [
+            'pt', 
+            'en',
+            'es',
+            'ru',
+            'ja',
+        ]
+        const selectLanguageIndex = readline.keyInSelect(prefixes, 'Escolha um idioma');
+        const selectLanguageText = idioma[selectLanguageIndex];
+
+        return selectLanguageText;
+    }
+
+    function chooseRenderProgram():RenderProgramProps{
+        const prefixes:RenderProgramProps[] = [
+            'After Effects',
+            'FFmpeg'
+        ];
+        
+        const selectProgramIndex = readline.keyInSelect(prefixes, 'Escolha um programa para renderizacao do video');
+        const selectProgram = prefixes[selectProgramIndex]
+
+        return selectProgram;
     }
 }
