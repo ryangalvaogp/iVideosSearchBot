@@ -111,5 +111,9 @@ content.json
 content/*.png
 content/*.jpg
 content/*.mov
+content/*.avi
 content/*.mp4
 content/*.js
+
+templates/1/Logs de template.aep/*.txt
+templates/1/Salvamento automático do Adobe After Effects/*.aep

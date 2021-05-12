@@ -22,6 +22,7 @@ const audio = path.resolve(rootPath, 'templates', '1', 'newsroom.mp3')
 const video = fromRoot('video.mp4');
 
 import { config } from "dotenv";
+import DeleteFileInContentFolder from '../utils/DeleteFileInContentFolder';
 config()
 
 export default async function videoRobot() {
@@ -31,8 +32,8 @@ export default async function videoRobot() {
     await createAllSentencesImages(content);
     await createThumbnail();
     await createScriptVideo(content)
+    await removeVideosForPerformaceOnRender()
     await renderVideo(content)
-    await convertOutputVideoToMp4();
 
     save(content);
 
@@ -154,7 +155,7 @@ export default async function videoRobot() {
     };
 
     async function createScriptVideo(content: contentProps) {
-        saveScript(content);
+        saveScript(content.searchTerm);
     };
 
     async function renderVideo(content: contentProps) {
@@ -180,14 +181,16 @@ export default async function videoRobot() {
                         if (fs.existsSync(aerenderFilePath)) {
                             await renderVideoWithAfterEffects(aerenderFilePath);
                         };
+                        await convertOutputVideoToMp4();
+                        return resolve();
                     } catch (error) {
                         console.error(error);
+                        reject(error)
                     };
-                    break;
 
                 case 'FFmpeg':
                     await renderVideoWithFFmpeg(content);
-                    break;
+                    return resolve()
             };
         });
     };
@@ -298,4 +301,14 @@ export default async function videoRobot() {
             });
         });
     };
-}
+
+    async function removeVideosForPerformaceOnRender() {
+        return new Promise<void>((resolve, reject) => {
+            DeleteFileInContentFolder('output.mov');
+            DeleteFileInContentFolder('output.avi');
+            DeleteFileInContentFolder('output.mp4');
+
+            return resolve();
+        });
+    };
+};
