@@ -32,7 +32,7 @@
 
   ### Algorithima 
   - É necessário criar a sua chave de acesso para poder testar os robôs, pra isso você precisa acessar o site do [Algorithmia](https://algorithmia.com/), aqui não tem muito segredo, basta acessar e se cadastrar, depois de logar na sua conta, na Dashboard procure no menu **Api Keys** e **copie**.
-   Vá até a pasta do projeto onde você clonou o repositório, navegue até a pasta **video-maker\credentials**, crie um arquivo de texto e renomeie para `algorithmia.json`, dentro desse arquivo você irá colocar a `API` que copiou do site **Algorithmia** na estrutura abaixo:
+   Vá até a pasta do projeto onde você clonou o repositório, navegue até a pasta **iVideosSearchBot\credentials**, crie um arquivo de texto e renomeie para `algorithmia.json`, dentro desse arquivo você irá colocar a `API` que copiou do site **Algorithmia** na estrutura abaixo:
 ``` js
 {
   "apiKeyAlgorithmia": "API_KEY_AQUI"
@@ -42,7 +42,7 @@
   - Você precisa criar também as credenciais do *Watson* no site da [IBM](https://cloud.ibm.com/login), também não tem segredo, basta se cadastrar, quando estiver logado no menu superior clique em **Catálogo**, depois dentro de **IA** procure por *Natural Language Understanding*
 clicando nele na nova página vai aparecer um botão "criar" no final da página, uma vez que o serviço for criado, você será redirecionado para a página de gerenciamento do serviço que você acabou de criar, no menu lateral esquerdo procure por **Credenciais de Serviços** e depois clique em **Auto-generated service credentials** destacado abaixo, então copie as *Credenciais*:
 
-Novamente, voltando na pasta do projeto ainda dentro da pasta **video-maker\credentials** você ira criar um novo arquivo de texto com o nome `watson-nlu.json` e dentro desse arquivo você vai colar as credenciais que copiou anteriormente:
+Novamente, voltando na pasta do projeto ainda dentro da pasta **iVideosSearchBot\credentials** você irá adicionar as chaves conforme o modelo a seguir:
 
 ``` js
 {
@@ -115,10 +115,7 @@ Após isso irá aparecer sua Api Key, você vai copia-la e clicar no botão conc
 ## Api: Custom Search Enginer ##
 Agora iremos configurar o nosso motor de busca personalizado do google, para isso você vai acessar o [Custom Search Engine](https://cse.google.com/cse/create/new), e irá informar o **site a pesquisar** coloque **google.com**, ire selecionar o idioma que preferir *no vídeo o Filipe deixa Inglês então aconselho deixar em inglês*, e por fim clique em **Opções avançadas** e para o esquema iremos utilizar o mais genérico **Thing**, pronto tudo preenchido você irá clicar em **criar**:
 
-> PS.: Para saber mais sobre o schema que o Filipe cita no vídeo acesse [schema.org](https://schema.org/docs/full.html)
-
 ![image](https://user-images.githubusercontent.com/34013325/55578410-38662680-56ec-11e9-80ea-06ff9e25ba3f.png)
-
 
 Agora basta clicar em **Painel de Controle** na nova tela nós iremos habilitar a opção **Pesquisa de imagens** e depois iremos clicar no botão **Copiar para área de transferência**"
 
