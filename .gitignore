@@ -117,3 +117,4 @@ content/*.js
 
 templates/1/Logs de template.aep/*.txt
 templates/1/Salvamento automático do Adobe After Effects/*.aep
+templates\1\bridge.js
