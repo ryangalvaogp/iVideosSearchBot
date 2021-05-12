@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { contentProps } from '../Types/TextRobotProps';
 const contentFilePath = './content.json';
-const scriptFilePath = './content/video-scripts.js'
+const scriptFilePath = './templates/1/bridge.js'
 
 export function save(content:contentProps) {
     const contentString = JSON.stringify(content);
@@ -9,8 +9,8 @@ export function save(content:contentProps) {
     return fs.writeFileSync(contentFilePath, contentString);
 };
 
-export function saveScript(content:contentProps) {
-    const contentString = JSON.stringify(content);
+export function saveScript(searchTerm:contentProps['searchTerm']) {
+    const contentString = JSON.stringify(searchTerm);
     const scriptString = ` var content = ${contentString}`
     return fs.writeFileSync(scriptFilePath, scriptString);
 };
