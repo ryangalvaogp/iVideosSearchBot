@@ -28,12 +28,14 @@ config()
 export default async function videoRobot() {
     const content = load()
 
+    console.log('> [video-robot] Getting Started...')
     await convertAllImages(content);
     await createAllSentencesImages(content);
     await createThumbnail();
     await createScriptVideo(content)
     await removeVideosForPerformaceOnRender()
     await renderVideo(content)
+    console.log('> [video-robot] ...Finished.')
 
     save(content);
 
@@ -74,7 +76,7 @@ export default async function videoRobot() {
                     if (err) {
                         return reject(err);
                     };
-                    console.log(`> [video-robot] Image converted: ${outputFile}`);
+                    console.log(`> [video-robot] Image Converted: ${outputFile}`);
                     resolve();
                 });
         });
@@ -133,7 +135,7 @@ export default async function videoRobot() {
                         return reject(error);
                     };
 
-                    console.log(`> [video-robot] Sentence created: ${outputFile}`);
+                    console.log(`> [video-robot] Sentence Created: ${outputFile}`);
                     resolve();
                 });
         });
@@ -148,7 +150,7 @@ export default async function videoRobot() {
                         return reject(error);
                     };
 
-                    console.log('> [Image-robot] Thumbnail created');
+                    console.log('> [Image-robot] Thumbnail Created');
                     resolve();
                 });
         });
@@ -200,7 +202,7 @@ export default async function videoRobot() {
             const templateFilePath = path.resolve(rootPath, '..', 'templates', '1', 'template.aep');
             const destinationFilePath = fromRoot('output.mp4');
 
-            console.log('Render Video With After Effects');
+            console.log('> [video-robot] Starting After Effects');
 
             const aerender = spawn(aerenderFilePath, [
                 '-comp', 'main',
@@ -220,7 +222,6 @@ export default async function videoRobot() {
     async function renderVideoWithFFmpeg(content: contentProps) {
         return new Promise<void>(async (resolve, reject) => {
             let images = [];
-            console.log('Render Video With FFmpeg');
             for (let sentenceIndex = 0; sentenceIndex < content.sentences.length; sentenceIndex++) {
                 images.push({
                     path: fromRoot(`${sentenceIndex}-converted.png`),
@@ -265,7 +266,7 @@ export default async function videoRobot() {
                     .audio(audio)
                     .save(video)
                     .on('start', (comand: any) => {
-                        console.log('> [video-robot] Starting FFmpeg', comand);
+                        console.log('> [video-robot] Starting FFmpeg Render', comand);
                     })
                     .on('error', (err: any, stdout: any, stderr: any) => {
                         console.error("Error", err);
@@ -273,7 +274,8 @@ export default async function videoRobot() {
                         reject(err);
                     })
                     .on("end", (output: any) => {
-                        console.log('> [video-robot] FFmpeg closed', output);
+                        console.log('> [video-robot] Render Complete');
+                        console.log('> [video-robot] ...FFmpeg Render Finished.', output);
                         resolve();
                     });
             } catch (error) {
@@ -285,7 +287,7 @@ export default async function videoRobot() {
     async function convertOutputVideoToMp4() {
         return new Promise<void>((resolve, reject) => {
             const ffmpegConvertPath = process.env.FFMPEGCONVERTPATH
-            console.log('> [video-robot] Converting Video');
+            console.log('> [video-robot] Converting Video to MP4');
 
             const ffmpegConvert = spawn(ffmpegConvertPath, [
                 '-i', `${fromRoot('output.mov')}`,
