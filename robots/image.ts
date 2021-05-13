@@ -8,10 +8,10 @@ const customSearch = google.customsearch('v1');
 export default async function imageRobot() {
     const content = load();
 
-    console.log('> [video-robot] Getting Started...')
+    console.log('> [image-robot] Getting Started...')
     await fetchImagesOfAllSentences(content);
     await downloadAllImages(content);
-    console.log('> [video-robot] ...Finished.')
+    console.log('> [image-robot] ...Finished.')
 
     save(content);
 
