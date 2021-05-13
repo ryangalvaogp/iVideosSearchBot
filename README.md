@@ -94,7 +94,7 @@ Procure por **Custom Search API** no dropdown e clique em "**Preciso de quais cr
 
 ![image](https://user-images.githubusercontent.com/34013325/55572958-2cc03300-56df-11e9-8bc1-17641ba5138e.png)
 
-Após isso irá aparecer sua Api Key, você vai copia-la e clicar no botão concluir, voltando a pasta do projeto você vai navegar até **video-maker/credentials** e irá adicionar as chaves, conforme o modelo a seguir:
+Após isso irá aparecer sua Api Key, você vai copia-la e clicar no botão concluir, voltando a pasta do projeto você vai navegar até **iVideosSearchBot/credentials** e irá adicionar as chaves, conforme o modelo a seguir:
 
 ``` js
 {
@@ -125,7 +125,7 @@ Agora basta clicar em **Painel de Controle** na nova tela nós iremos habilitar 
 
 ![image](https://user-images.githubusercontent.com/34013325/55574920-0355d600-56e4-11e9-8f36-822a62224fab.png)
 
-Voltando no arquivo **google-search.json** iremos criar uma nova propriedade e iremos colar o código identificador do mecanismo de busca que criamos, identificado por `searchEngineId`, no final irá ficar assim:
+Voltando no arquivo **env.json** iremos criar uma nova propriedade e iremos colar o código identificador do mecanismo de busca que criamos, identificado por `searchEngineId`, no final irá ficar assim:
 
 ``` js
 {
@@ -144,6 +144,32 @@ Voltando no arquivo **google-search.json** iremos criar uma nova propriedade e i
     }
 }
 ```
+
+## API YouTube ##
+
+Chegou a hora de configurarmos a api do youtube!, como fizemos na api custom search iremos fazer o mesmo com a api do YoutTube, então basta acessar o [Google Cloud](https://cloud.google.com/) e habilitar o serviço do YouTube, clicando no menu Lateral **Apis e Serviços -> Biblioteca**, na caixa de pesquisa procure por **YouTube**, e click no botão Ativar: 
+
+![ezgif-5-fa13fd3c8407](https://user-images.githubusercontent.com/34013325/57034414-d08cf800-6c25-11e9-9867-03024a30028a.gif)
+
+Agora clique na guia **Tela de consentimento OAuth** 
+![image](https://user-images.githubusercontent.com/34013325/57034753-c0294d00-6c26-11e9-8ee9-ff5e12ea6470.png)
+
+Em seguida preencha apenas o campo "nome do aplicativo", futuramente você pode voltar aqui para personalizar com as outras informações caso desejar:
+
+![image](https://user-images.githubusercontent.com/34013325/57034907-1d250300-6c27-11e9-8c9f-e2e0d4e95b95.png)
+
+Clique no dropdown **Criar credenciais** e escolha **ID do Cliente OAuth**:
+![image](https://user-images.githubusercontent.com/34013325/57035299-1054df00-6c28-11e9-9a04-a4cef439e41e.png)
+
+Aqui não tem muito segredo, escolha **Aplicativo da Web** para o **Tipo de Aplicativo**, escolha um **nome do aplicativo**, no primeiro campo insira o endereço **http://localhost:5000** e no segundo **http://localhost:5000/oauth2callback** e clique no botão criar:
+
+![image](https://user-images.githubusercontent.com/34013325/57035477-85281900-6c28-11e9-829a-1c0c074bc478.png)
+
+Após ser criada, irá aparecer uma janela com as credenciais, você pode dar ok, pois iremos baixar as credencias como na tela abaixo:
+
+![image](https://user-images.githubusercontent.com/34013325/57036076-aa695700-6c29-11e9-8c4d-fc78fecdae46.png)
+
+renomeio o arquivo para **credentialsOAuthYT.json** e salve dentro da pasta **iVideosSearchBot/credentials** 😄
 
 - Crie um arquivo `.env` e dentro dele insira o caminho do After Effects e FFmpeg Convert, conforme o modelo a seguir:
 ``````env
