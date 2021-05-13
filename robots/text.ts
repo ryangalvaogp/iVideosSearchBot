@@ -15,13 +15,13 @@ const nlu = new NaturalLanguageUnderstandingV1({
 export async function robotText() {
     const content = load()
 
-    console.log('> [video-robot] Getting Started...')
+    console.log('> [text-robot] Getting Started...')
     await fetchContentFromWikipedia(content);
     sanitizeContent(content);
     breakContentIntoSentences(content);//@ts-ignore
     limitMaximumSentences(content);
     await fetchKeywordsOfAllSentences(content);
-    console.log('> [video-robot] ...Finished.')
+    console.log('> [text-robot] ...Finished.')
 
     save(content);
 

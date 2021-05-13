@@ -287,6 +287,7 @@ export default async function videoRobot() {
     async function convertOutputVideoToMp4() {
         return new Promise<void>((resolve, reject) => {
             const ffmpegConvertPath = process.env.FFMPEGCONVERTPATH
+            console.log('> [video-robot] Starting FFmpeg Convert...');
             console.log('> [video-robot] Converting Video to MP4');
 
             const ffmpegConvert = spawn(ffmpegConvertPath, [
@@ -298,7 +299,7 @@ export default async function videoRobot() {
                 process.stdout.write(data);
             })
             ffmpegConvert.on('close', () => {
-                console.log('> [video-robot] FFmpeg Convert Closed');
+                console.log('> [video-robot] ...FFmpeg Convert Finished');
                 resolve();
             });
         });
