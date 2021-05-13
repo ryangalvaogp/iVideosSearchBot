@@ -8,8 +8,10 @@ const customSearch = google.customsearch('v1');
 export default async function imageRobot() {
     const content = load();
 
+    console.log('> [video-robot] Getting Started...')
     await fetchImagesOfAllSentences(content);
     await downloadAllImages(content);
+    console.log('> [video-robot] ...Finished.')
 
     save(content);
 
@@ -17,6 +19,8 @@ export default async function imageRobot() {
 
         for (const sentence of content.sentences) {
             const query = `${content.searchTerm} ${sentence.keywords[0]}`;
+
+            console.log(`> [image-robot] Querying Google Images on: "${query}"`)
             sentence.images = await fetchGoogleAndReturnImagesLinks(query);
 
             sentence.googleSearchQuery = query;
@@ -54,7 +58,7 @@ export default async function imageRobot() {
 
                 try {
                     if (content.downloadedImages.includes(imageUrl)) {
-                        throw new Error('Image already downloaded')
+                        throw new Error('Image has already been downloaded')
                     };
 
                     await downloadAndSaveImages(
@@ -66,7 +70,7 @@ export default async function imageRobot() {
 
                     console.log(
                         `>[image-robot] [${sentenceIndex}][${imageIndex}] 
-                    Image successfully downloaded: ${imageUrl}`
+                        Image downloaded successfully: ${imageUrl}`
                     );
                     break;
                 } catch (error) {

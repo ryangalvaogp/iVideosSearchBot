@@ -15,34 +15,33 @@ const nlu = new NaturalLanguageUnderstandingV1({
 export async function robotText() {
     const content = load()
 
+    console.log('> [video-robot] Getting Started...')
     await fetchContentFromWikipedia(content);
     sanitizeContent(content);
     breakContentIntoSentences(content);//@ts-ignore
     limitMaximumSentences(content);
-   
-    try {
-        await fetchKeywordsOfAllSentences(content);
-        save(content);
-    } catch (error) {
-        console.log(error)
-    }
-    
+    await fetchKeywordsOfAllSentences(content);
+    console.log('> [video-robot] ...Finished.')
 
+    save(content);
 
     async function fetchContentFromWikipedia(content: contentProps) {
+        console.log('> [text-robot] Searching Wikipedia content');
         let pesquisaNoIdioma = {
             "articleName": content.searchTerm,
             "lang": content.lang
-          }
+        }
         const algorithmiaAuthenticated = algorithmia(env.apiKeyAlgorithmia)
         const wikipediaAlgorithm = algorithmiaAuthenticated.algo('web/WikipediaParser/0.1.2')
         const wikipediaResponse = await wikipediaAlgorithm.pipe(pesquisaNoIdioma)
         const wikipediaContent = wikipediaResponse.get()
 
         content.sourceContentOriginal = wikipediaContent.content
+        console.log('> [text-robot] Search Completed!')
     };
 
     function sanitizeContent(content: contentProps) {
+        console.log('> [text-robot] Processing and handling text');
         const withoutBlankLinesAndMarkdown = removeBlankLinesAndMarkdown(content.sourceContentOriginal);
         const withoutDatesInParentheses = removeDatesInParentheses(withoutBlankLinesAndMarkdown)
 
@@ -85,14 +84,18 @@ export async function robotText() {
     }
 
     async function fetchKeywordsOfAllSentences(content: contentProps) {
-        
+        console.log('> [text-robot] Starting to search for keywords with Watson');
+
         for (const sentence of content.sentences) {
-            //@ts-ignore
+            console.log(`> [text-robot] Sentença: "${sentence.text}"`)//@ts-ignore
+
             sentence.keywords = await fetchWatsonAndReturnKeywords(sentence.text)
+
+            console.log(`> [text-robot] Key words: ${sentence.keywords.join(', ')}\n`)
         }
     }
 
-    async function fetchWatsonAndReturnKeywords(sentence:string) {
+    async function fetchWatsonAndReturnKeywords(sentence: string) {
         return new Promise((resolve, reject) => {
             nlu.analyze({
                 text: sentence,
