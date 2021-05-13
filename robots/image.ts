@@ -23,14 +23,18 @@ export default async function imageRobot() {
         };
     };
 
+
     async function fetchGoogleAndReturnImagesLinks(query: string) {
+        //https://developers.google.com/custom-search/v1/reference/rest/v1/cse/list
         const response = await customSearch.cse.list({
             auth: env.google.apiKey,
             cx: env.google.IDSearchEngine,
             q: query,
             num: 2,
             searchType: 'image',
-            imgSize: 'huge'
+            imgType: 'photo',
+            lr: 'lang_pt',
+            imgSize: 'large'
         });
 
         const imagesUrl = response.data.items?.map((item) => {
