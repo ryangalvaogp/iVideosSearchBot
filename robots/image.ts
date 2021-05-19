@@ -16,14 +16,19 @@ export default async function imageRobot() {
     save(content);
 
     async function fetchImagesOfAllSentences(content: contentProps) {
+        for (let sentenceIndex = 0; sentenceIndex < content.sentences.length;sentenceIndex++) {
+            let query;
 
-        for (const sentence of content.sentences) {
-            const query = `${content.searchTerm} ${sentence.keywords[0]}`;
+            if(sentenceIndex ===0){
+                query = `${content.searchTerm}`;
+            }else{
+                query = `${content.searchTerm} ${content.sentences[sentenceIndex].keywords[0]}`;
+            };
 
-            console.log(`> [image-robot] Querying Google Images on: "${query}"`)
-            sentence.images = await fetchGoogleAndReturnImagesLinks(query);
+            console.log(`> [image-robot] Querying Google Images on: "${query}"`);
 
-            sentence.googleSearchQuery = query;
+            content.sentences[sentenceIndex].images = await fetchGoogleAndReturnImagesLinks(query);
+            content.sentences[0].googleSearchQuery = query;
         };
     };
 
